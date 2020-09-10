@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      
+      
+      {% for link in linklists.main-menu.links %}
+      
+      	{% if link.links == blank  %}
+           <li class="nav-item">
+           	 <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+          	</li>
+      	{% endif  %}
+      
+      	{% if link.links != blank %}
+      		 <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Shop
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  {% for child in link.links %}
+                  	<a class="dropdown-item" href="{{ child.url }}">{{ child.title }}</a>	
+                  {% endfor %}
+                  
+                </div>
+              </li>
+      	{% endif%}
+       
+      {% endfor %}
+    	
+      </div>
+     
+    </ul>
+  
+  </div>
+</nav>
+
+
+{% schema %}
+  {
+    "name": "Main Menu",
+    "settings": [
+	{
+        "type": "link_list",
+        "id": "main_linklist",
+        "label": "Main Navigation",
+        "default": "main-menu"
+      }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
